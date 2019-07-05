@@ -8,8 +8,8 @@ import (
 
 // An Item is something we manage in a priority queue.
 type Item struct {
-	value    interface{}
-	priority int64
+	Value    interface{}
+	Priority int64
 	index    int // The index of the item in the heap. It is needed by update and is maintained by the heap.Interface methods.
 }
 
@@ -19,7 +19,7 @@ type PriorityQueue []*Item
 func (pq PriorityQueue) Len() int { return len(pq) }
 
 func (pq PriorityQueue) Less(i, j int) bool {
-	return pq[i].priority < pq[j].priority
+	return pq[i].Priority < pq[j].Priority
 }
 
 func (pq PriorityQueue) Swap(i, j int) {
@@ -48,7 +48,7 @@ func (pq *PriorityQueue) Pop() interface{} {
 
 // Update modifies the priority and value of an Item in the queue.
 func (pq *PriorityQueue) Update(item *Item, value interface{}, priority int64) {
-	item.value = value
-	item.priority = priority
+	item.Value = value
+	item.Priority = priority
 	heap.Fix(pq, item.index)
 }
